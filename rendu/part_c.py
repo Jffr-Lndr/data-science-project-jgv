@@ -141,14 +141,14 @@ def pred_4():
 
 
     Y = data_frame_train['price']
-    X = data_frame_train.drop(['availability','area_type','location'],axis=1)
+    X = data_frame_train.drop(['price','availability','area_type','location'],axis=1)
 
     linear_model = LinearRegression(
         fit_intercept=False
     )
     linear_model.fit(X.values, Y)
 
-    X = data_frame_test.drop(['availability','area_type','location'],axis=1)
+    X = data_frame_test.drop(['price','availability','area_type','location'],axis=1)
     y_predictions_test = linear_model.predict(X.values)
 
     model_3_predictions = data_frame_test[['index','total_sqft','price']]
