@@ -153,7 +153,6 @@ def pred_4():
 
     model_3_predictions = data_frame_test[['index','total_sqft','price']]
     model_3_predictions['price_pred'] = y_predictions_test
-    #model_3_predictions['price_pred_error'] = [x[2] - x[3] for x in model_3_predictions.values]
     model_3_predictions.to_sql('model_3_predictions',engine,if_exists='replace')
     print(model_3_predictions)
 
