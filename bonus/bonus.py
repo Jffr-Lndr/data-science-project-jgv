@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 
 data_frame_train = pd.read_csv('./ensae_competition_train.txt', header=[0,1], sep="\t", index_col=0)
 data_frame_test = pd.read_csv('./ensae_competition_test_X.txt', header=[0,1], sep="\t", index_col=0)
@@ -82,14 +82,14 @@ for col in missing_in_col_test_set:
 Y = data_frame_train['Y']
 X = data_frame_train.drop(['Y'],axis=1)
 
-linear_model = LinearRegression(
+model = LogisticRegression(
         fit_intercept=False
     )
-linear_model.fit(X.values, Y)
+model.fit(X.values, Y)
 
 
 X = data_frame_train.drop(['Y'],axis=1)
-y_predictions_test = linear_model.predict(X.values)
+y_predictions_test = model.predict(X.values)
 
 
 print(y_predictions_test)
