@@ -8,7 +8,7 @@ engine = create_engine(DATABASE_URL, connect_args={'sslmode': "allow"})
 
 data_frame = pd.read_sql('data_cleaned', engine).dropna()
 
-
+# Récupère chaque variable quantitative autre que le prix et les représentes dans un scatter plot
 def graph_1():
     Y = data_frame['price']
     fig = plt.figure()
@@ -34,7 +34,7 @@ def graph_1():
     d.set_ylabel('Prix')
     plt.show()
 
-
+# Permet de représenter un graphique qui détermine pour quel nombre de balcons les biens ont le prix moyen le plus élevé.
 def graph_2():
 
     def avg_price_balc(balcony_number):
@@ -48,6 +48,7 @@ def graph_2():
     plt.ylabel('Prix')
     plt.show()
 
+# Représente un graphique qui permet de déterminer pour quel nombre de salles de bains les biens ont le prix moyen le plus élevé.
 def graph_3():
 
     def avg_price_bath(bath_number):
@@ -63,6 +64,7 @@ def graph_3():
     plt.ylabel('Prix')
     plt.show()
 
+#Créer une DataFrame avec les colonnes availability, count, count_cum, price_mean et les stocks dans une DataFrame nommée data_availability.
 def reframe_4():
     data_availability = data_frame.drop_duplicates(['availability'])
     data_availability['count'] = [data_frame[data_frame['availability'] == x].count(axis=0)[0] for x in data_availability['availability']]
@@ -71,6 +73,7 @@ def reframe_4():
     data_availability['price_mean'] = [data_frame[data_frame['availability'] == x].mean(axis=0,numeric_only=True)['price'] for x in data_availability['availability']]
     data_availability.to_sql('data_availability',engine,if_exists='replace')
 
+# Représente la matrice des corrélations des variables quantitatives
 def corr_5():
     cols = ['size','total_sqft','bath','balcony','price']
     matrix = data_frame[cols].corr()
